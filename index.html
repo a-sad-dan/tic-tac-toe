@@ -1,32 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
     <link rel="shortcut icon" href="assets/tic-tac-toe.svg" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
+    <div class="header">Tic Tac Toe</div>
     <div class="game">
-        <div class="board"></div>
-        <div class="top left square"></div>
-        <div class="top square "></div>
-        <div class="top right square"></div>
-        <div class="left square"></div>
-        <div class="square"></div>
-        <div class="right square"></div>
-        <div class="bottom left square"></div>
-        <div class="bottom square"></div>
-        <div class="bottom right square"></div>
+        <div class="board">
+            <div class="top left square">x</div>
+            <div class="top square ">o</div>
+            <div class="top right square">x</div>
+            <div class="left square">o</div>
+            <div class="square">x</div>
+            <div class="right square">o</div>
+            <div class="bottom left square">x</div>
+            <div class="bottom square">o</div>
+            <div class="bottom right square">x</div>
+        </div>
     </div>
-    <div class="score">
-        <div class="player"></div>
-        <div class="tie"></div>
-        <div class="computer"></div>
+    <div class="control">
+        <div class="player score"></div>
+        <div class="tie score"></div>
+        <div class="computer score"></div>
         <div class="swap"></div>
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
