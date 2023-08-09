@@ -29,16 +29,17 @@ const GameModule = (() => {
             '', '', ''];
 
 
-    
+
 
     // Public method to make a move
     const makeMove = (index) => {
         if (gameBoard[index] == '') {
+            document.querySelector(`[data-index = "${index}"]`).textContent = currentPlayer.getSign();
             gameBoard[index] = currentPlayer.getSign()
             switchPlayer();
             printBoard();
         }
-        
+
         else {
             console.log('position already taken');
         }
@@ -67,7 +68,7 @@ const GameModule = (() => {
 
     // Private Method to check if the game is over
     const isGameOver = () => {
-        if (gameBoard.every(entry => entry !== ''));
+        return (gameBoard.every(entry => entry !== ''));
     }
 
 
@@ -82,10 +83,11 @@ const GameModule = (() => {
     }
 
     const resetGame = () => {
-        let gameBoard =
+        gameBoard =
             ['', '', '',
                 '', '', '',
                 '', '', ''];
+        document.querySelectorAll('.square').forEach(element => element.textContent = '');
     }
 
     return { makeMove, isGameOver, getScores, getCurrentPlayer, resetGame, printBoard, checkWin }
@@ -119,15 +121,29 @@ const playGame = () => {
         //Getting input from users
         const positionsArr = document.querySelectorAll('.square');
         positionsArr.forEach(element => element.addEventListener('click', () => {
+            element.classList.add('active');
+            setTimeout(()=>
+            element.classList.remove('active'),150
+            )
+
             GameModule.makeMove(parseInt(element.getAttribute('data-index')));
 
             if (GameModule.checkWin(p1) || GameModule.checkWin(p2)) {
                 const winner = (GameModule.getCurrentPlayer().getSign() === 'x' ? p2.getSign() : p1.getSign())
-                alert(`Winner is ${winner}`);
-                GameModule.resetGame();
+                setTimeout(()=>
+                alert(`Winner is ${winner}`)
+                ,200)
+
+                setTimeout(() => {
+                    GameModule.resetGame();
+                }, 400);
             }
+
             if (GameModule.isGameOver()) {
                 alert('Game Tied');
+                setTimeout(() => {
+                    GameModule.resetGame();
+                }, 400);
             }
 
         }));
