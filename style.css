@@ -78,6 +78,10 @@ body {
 .active {
     box-shadow: 0px 0px 12px -6px var(--primary) inset;
 }
+.active:hover
+{
+    box-shadow: 0px 0px 12px -6px var(--primary) inset;
+}
 
 .control {
     display: grid;
