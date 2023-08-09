@@ -139,8 +139,10 @@ const playGame = () => {
                 }, 400);
             }
 
-            if (GameModule.isGameOver()) {
-                alert('Game Tied');
+            if (GameModule.isGameOver() && !(GameModule.checkWin(p1) || GameModule.checkWin(p2))) {
+                setTimeout(()=>
+                alert('Game Tied')
+                ,200)
                 setTimeout(() => {
                     GameModule.resetGame();
                 }, 400);
