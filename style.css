@@ -17,6 +17,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: var(--secondary);
 }
 
 .header {
@@ -40,22 +41,22 @@ body {
 }
 
 .control {
-    height: 15vh;
+    height: 20vh;
 }
 
-.square
-{
+.square {
     /* border-top: 3px solid var(--primary); */
     /* border-left: 3px solid var(--primary); */
 
     display: grid;
     place-content: center;
-    
+
     font-size: 5rem;
     font-weight: 300;
     cursor: pointer;
     user-select: none;
 }
+
 /* .square:nth-child(3n)
 {
     border-right: 3px solid var(--primary);
@@ -65,8 +66,52 @@ body {
     border-bottom: 3px solid var(--primary);
 } */
 
-.square
-{
-    box-shadow: 0px 0px 12px -6px var(--primary) ;
+.square {
+    box-shadow: 0px 0px 12px -6px var(--primary);
     border-radius: 12px;
+}
+
+.square:hover {
+    box-shadow: 0px 0px 16px -6px var(--primary);
+}
+
+.active {
+    box-shadow: 0px 0px 12px -6px var(--primary) inset;
+}
+
+.control {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-content: center;
+}
+
+.score {
+    text-align: center;
+}
+
+.p1.score::before {
+    content: 'Player 1';
+    display: block;
+    font-size: 2rem;
+    padding: 0.4rem;
+
+}
+
+.p2.score::before {
+    content: 'Player 2';
+    display: block;
+    font-size: 2rem;
+    padding: 0.4rem;
+
+}
+
+.tie.score::before {
+    content: 'Tie';
+    display: block;
+    font-size: 2rem;
+    padding: 0.4rem;
+}
+
+.score {
+    font-size: 2rem;
 }
