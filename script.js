@@ -122,27 +122,39 @@ const playGame = () => {
         const positionsArr = document.querySelectorAll('.square');
         positionsArr.forEach(element => element.addEventListener('click', () => {
             element.classList.add('active');
-            setTimeout(()=>
-            element.classList.remove('active'),150
+            setTimeout(() =>
+                element.classList.remove('active'), 500
             )
 
             GameModule.makeMove(parseInt(element.getAttribute('data-index')));
 
+            function writeToResult(text) {
+                const resultModal = document.querySelector('.modal.result');
+                // const game = document.querySelector('.game')
+                resultModal.classList.remove('hidden');
+                // game.classList.add('hidden');
+                document.querySelector('.modal.result').textContent = text;
+                resultModal.addEventListener('click', () => {
+                    resultModal.classList.add('hidden');
+                    // game.classList.remove('hidden');
+                });
+
+            }
+
+
             if (GameModule.checkWin(p1) || GameModule.checkWin(p2)) {
                 const winner = (GameModule.getCurrentPlayer().getSign() === 'x' ? p2.getSign() : p1.getSign())
-                setTimeout(()=>
-                alert(`Winner is ${winner}`)
-                ,200)
 
+                writeToResult(`${winner} wins this Round!`);
                 setTimeout(() => {
                     GameModule.resetGame();
                 }, 400);
             }
 
             if (GameModule.isGameOver() && !(GameModule.checkWin(p1) || GameModule.checkWin(p2))) {
-                setTimeout(()=>
-                alert('Game Tied')
-                ,200)
+                setTimeout(() =>
+                    alert('Game Tied')
+                    , 200)
                 setTimeout(() => {
                     GameModule.resetGame();
                 }, 400);
