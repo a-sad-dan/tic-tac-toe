@@ -12,11 +12,13 @@ const p2 = Player('o');
 // Game Module Object
 const GameModule = (() => {
 
-    const scores = {
+    let scores = {
         "p1": 0,
         "tie": 0,
         "p2": 0
     }
+
+
 
     const getScores = () => {
         return scores;
@@ -29,25 +31,18 @@ const GameModule = (() => {
             '', '', ''];
 
 
-
-
     // Public method to make a move
     const makeMove = (index) => {
         if (gameBoard[index] == '') {
             const selectedSquare = document.querySelector(`[data-index = "${index}"]`);
             // setTimeout(() => {
-                selectedSquare.classList.add('filled');
+            selectedSquare.classList.add('filled');
             // }, 150);
             selectedSquare.textContent = currentPlayer.getSign();
             gameBoard[index] = currentPlayer.getSign()
             switchPlayer();
-            printBoard();
             document.querySelector('.board').classList.toggle('cross-cursor');
             document.querySelector('.board').classList.toggle('circle-cursor');
-        }
-
-        else {
-            console.log('position already taken');
         }
     }
 
@@ -77,17 +72,6 @@ const GameModule = (() => {
         return (gameBoard.every(entry => entry !== ''));
     }
 
-
-
-
-
-    // Public method to print the board after every move
-    const printBoard = () => {
-        console.log(`${gameBoard[0]}    ${gameBoard[1]}     ${gameBoard[2]}`)
-        console.log(`${gameBoard[3]}    ${gameBoard[4]}     ${gameBoard[5]}`)
-        console.log(`${gameBoard[6]}    ${gameBoard[7]}     ${gameBoard[8]}`)
-    }
-
     const resetGame = () => {
         gameBoard =
             ['', '', '',
@@ -102,7 +86,7 @@ const GameModule = (() => {
         });
     }
 
-    return { makeMove, isGameOver, getScores, getCurrentPlayer, resetGame, printBoard, checkWin }
+    return { makeMove, isGameOver, getScores, getCurrentPlayer, resetGame, checkWin }
 })();
 
 
@@ -151,21 +135,29 @@ const playGame = () => {
 
 
             if (GameModule.checkWin(p1) || GameModule.checkWin(p2)) {
-                const winner = (GameModule.getCurrentPlayer().getSign() === 'x' ? p2.getSign() : p1.getSign())
-                writeToResult(`${winner} wins this Round!`);
+                const winner = (GameModule.getCurrentPlayer() == p1 ? p2 : p1)
+                const winnerSign = winner.getSign();
+
+                // To Log win of a player
+                winner == p1 ? GameModule.getScores().p1 += 1 : GameModule.getScores().p2 += 1;
+
+                writeToResult(`${winnerSign} wins this Round!`);
                 setTimeout(() => {
                     GameModule.resetGame();
                 }, 400);
+                controlWindow.renderScore();
             }
 
             if (GameModule.isGameOver() && !(GameModule.checkWin(p1) || GameModule.checkWin(p2))) {
                 writeToResult(`Round Tied`);
 
+                // Log a tie
+                GameModule.getScores().tie += 1;
                 setTimeout(() => {
                     GameModule.resetGame();
                 }, 400);
+                controlWindow.renderScore();
             }
-
         }));
     }
 };
