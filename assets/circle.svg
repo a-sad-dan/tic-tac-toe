@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="64"
+   height="64"
+   viewBox="0 -0.5 1.36 1.36"
+   version="1.1"
+   class="si-glyph si-glyph-tic-tac-toe"
+   id="svg18"
+   sodipodi:docname="circle.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview20"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="8.0248835"
+     inkscape:cx="45.91967"
+     inkscape:cy="16.511143"
+     inkscape:window-width="1920"
+     inkscape:window-height="1012"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g14"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <title
+     id="title2">851</title>
+  <defs
+     id="defs4" />
+  <g
+     stroke="none"
+     stroke-width="1"
+     fill="none"
+     fill-rule="evenodd"
+     id="g16"
+     transform="translate(-13.398055,-2.4299849)">
+    <g
+       transform="translate(1)"
+       fill="#434343"
+       id="g14">
+      <path
+         d="m 13.077957,1.9299849 c -0.375328,0 -0.679902,0.3043782 -0.679902,0.6800979 0,0.3755239 0.304574,0.6799021 0.679902,0.6799021 0.37572,0 0.680098,-0.3043782 0.680098,-0.6799021 0,-0.3759157 -0.304378,-0.6800979 -0.680098,-0.6800979 z m 0.008,1.1951693 c -0.284583,0 -0.515268,-0.2289206 -0.515268,-0.5113475 0,-0.2822308 0.230685,-0.5113474 0.515268,-0.5113474 0.284779,0 0.515855,0.2291166 0.515855,0.5113474 0,0.2824269 -0.231076,0.5113475 -0.515855,0.5113475 z"
+         class="si-glyph-fill"
+         id="path6"
+         style="stroke-width:0.195994" />
+    </g>
+  </g>
+  <metadata
+     id="metadata532">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>851</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>
