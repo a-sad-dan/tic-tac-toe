@@ -34,10 +34,16 @@ const GameModule = (() => {
     // Public method to make a move
     const makeMove = (index) => {
         if (gameBoard[index] == '') {
-            document.querySelector(`[data-index = "${index}"]`).textContent = currentPlayer.getSign();
+            const selectedSquare = document.querySelector(`[data-index = "${index}"]`);
+            // setTimeout(() => {
+                selectedSquare.classList.add('filled');
+            // }, 150);
+            selectedSquare.textContent = currentPlayer.getSign();
             gameBoard[index] = currentPlayer.getSign()
             switchPlayer();
             printBoard();
+            document.querySelector('.board').classList.toggle('cross-cursor');
+            document.querySelector('.board').classList.toggle('circle-cursor');
         }
 
         else {
@@ -87,7 +93,13 @@ const GameModule = (() => {
             ['', '', '',
                 '', '', '',
                 '', '', ''];
-        document.querySelectorAll('.square').forEach(element => element.textContent = '');
+        document.querySelectorAll('.square').forEach(element => {
+            element.textContent = '';
+            if (element.classList.contains('filled')) { element.classList.remove(('filled')) }
+            if (element.classList.contains('cross-cursor')) { element.classList.remove(('cross-cursor')) }
+            if (element.classList.contains('circle-cursor')) { element.classList.remove(('circle-cursor')) }
+            // element.classList.remove('filed');
+        });
     }
 
     return { makeMove, isGameOver, getScores, getCurrentPlayer, resetGame, printBoard, checkWin }
@@ -130,21 +142,16 @@ const playGame = () => {
 
             function writeToResult(text) {
                 const resultModal = document.querySelector('.modal.result');
-                // const game = document.querySelector('.game')
                 resultModal.classList.remove('hidden');
-                // game.classList.add('hidden');
                 document.querySelector('.modal.result').textContent = text;
                 resultModal.addEventListener('click', () => {
                     resultModal.classList.add('hidden');
-                    // game.classList.remove('hidden');
                 });
-
             }
 
 
             if (GameModule.checkWin(p1) || GameModule.checkWin(p2)) {
                 const winner = (GameModule.getCurrentPlayer().getSign() === 'x' ? p2.getSign() : p1.getSign())
-
                 writeToResult(`${winner} wins this Round!`);
                 setTimeout(() => {
                     GameModule.resetGame();
@@ -152,22 +159,14 @@ const playGame = () => {
             }
 
             if (GameModule.isGameOver() && !(GameModule.checkWin(p1) || GameModule.checkWin(p2))) {
-                setTimeout(() =>
-                    alert('Game Tied')
-                    , 200)
+                writeToResult(`Round Tied`);
+
                 setTimeout(() => {
                     GameModule.resetGame();
                 }, 400);
             }
 
         }));
-
-
-        // const position = prompt("Enter position from 1 - 9");
-        // const index = parseInt(position) -1 ;
-        // console.log(index);
-        // GameModule.makeMove(index);
-
     }
 };
 
