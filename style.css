@@ -126,7 +126,7 @@ body {
     place-content: center;
     font-size: 4rem;
     overflow: hidden;
-    cursor: url('assets/replay.svg'),pointer;
+    cursor: url('assets/replay.svg'), pointer;
 }
 
 .hidden {
@@ -134,23 +134,62 @@ body {
     transition: width 1s ease-in, height 250ms ease-in-out;
 }
 
-.filled
-{
-    cursor: url('assets/not-allowed.svg'),not-allowed;
+.filled {
+    cursor: url('assets/not-allowed.svg'), not-allowed;
 }
 
 .cross-cursor {
-    cursor: url('assets/cross.svg'),crosshair;
+    cursor: url('assets/cross.svg'), crosshair;
 }
 
 .circle-cursor {
-    cursor: url('assets/circle.svg'), wait; 
+    cursor: url('assets/circle.svg'), wait;
+}
+
+
+/* Media Queries for Phones */
+@media (max-width: 599px) {
+    .game
+    {
+        width: 90vw;
+        height: 90vw;
+        margin: 0 auto;30.2rem
+    }
+    .board {
+        width: 100%;
+    }
+
+    .score
+    {
+        font-size: 1.2rem;
+    }
+
+    .p1.score::before {
+        content: 'Player 1';
+        display: block;
+        font-size: 1.4rem;
+        padding: 0.2rem;
+    
+    }
+    
+    .p2.score::before {
+        content: 'Player 2';
+        display: block;
+        font-size: 1.4rem;
+        padding: 0.2rem;
+    
+    }
+    
+    .tie.score::before {
+        content: 'Tie';
+        display: block;
+        font-size: 1.4rem;
+        padding: 0.2rem;
+    }
 }
 
 /*
  Notes to Self 
 need to remove the active toggle from the squares which are already filled
-
-
 
 */
