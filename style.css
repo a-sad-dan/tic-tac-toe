@@ -149,6 +149,12 @@ body {
 
 /* Media Queries for Phones */
 @media (max-width: 599px) {
+
+    body
+    {
+        padding: 1.2rem 0;
+    }
+
     .game
     {
         width: 90vw;
@@ -157,6 +163,10 @@ body {
     }
     .board {
         width: 100%;
+    }
+    .square
+    {
+        font-size: 3.5rem;
     }
 
     .score
@@ -185,6 +195,11 @@ body {
         display: block;
         font-size: 1.4rem;
         padding: 0.2rem;
+    }
+    .modal.result
+    {
+        width: 90%;
+        font-size: 1.5rem;
     }
 }
 
