@@ -6,6 +6,8 @@ const Player = (sign) => {
 
 let vsAiMode = 1;
 
+const toggleAi = () => vsAiMode == 1 ? 0 : 1;
+
 const p1 = Player('x');
 const p2 = Player('o');
 
@@ -45,7 +47,7 @@ const GameModule = (() => {
             document.querySelector('.board').classList.toggle('cross-cursor');
             document.querySelector('.board').classList.toggle('circle-cursor');
 
-            GameModule.checkWinnerAndTie();
+            checkWinnerAndTie();
             switchPlayer();
         }
     }
@@ -85,38 +87,36 @@ const GameModule = (() => {
     }
 
     const checkWinnerAndTie = () => {
-        if (GameModule.checkWin(p1) || GameModule.checkWin(p2)) {
-            const winner = (GameModule.getCurrentPlayer())
+        if (checkWin(p1) || checkWin(p2)) {
+            const winner = getCurrentPlayer()
             const winnerSign = winner.getSign();
 
             // To Log win of a player
-            winner == p1 ? GameModule.getScores().p1 += 1 : GameModule.getScores().p2 += 1;
+            winner == p1 ? getScores().p1 += 1 : getScores().p2 += 1;
 
             writeToResult(`${winnerSign} wins this Round!`);
-            setTimeout(() => {
-                GameModule.resetGame();
-            }, 400);
             controlWindow.renderScore();
         }
 
-        if (GameModule.isGameOver() && !(GameModule.checkWin(p1) || GameModule.checkWin(p2))) {
+        if (isGameOver() && !(checkWin(p1) || checkWin(p2))) {
             writeToResult(`Round Tied`);
 
             // Log a tie
             GameModule.getScores().tie += 1;
-            setTimeout(() => {
-                GameModule.resetGame();
-            }, 400);
             controlWindow.renderScore();
         }
     }
 
     function writeToResult(text) {
-        const resultModal = document.querySelector('.modal.result');
-        resultModal.classList.remove('hidden');
-        document.querySelector('.modal.result').textContent = text;
-        resultModal.addEventListener('click', () => {
-            resultModal.classList.add('hidden');
+        const resultModal = document.querySelector('.modal .result');
+        const modal = document.querySelector('.modal');
+        modal.classList.remove('hidden');
+
+        resultModal.textContent = text;
+
+        modal.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            resetGame();
         });
     }
 
@@ -142,7 +142,7 @@ const GameModule = (() => {
         });
     }
 
-    return { makeMove, isGameOver, getScores, getCurrentPlayer, resetGame, checkWin, switchPlayer, checkWinnerAndTie }
+    return { makeMove, getScores, getCurrentPlayer }
 })();
 
 
