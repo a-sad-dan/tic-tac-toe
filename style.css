@@ -13,13 +13,13 @@
 
 body {
     height: 100vh;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-content: space-around;
     background-color: var(--secondary);
     padding: 1rem 0;
-    gap: 1rem;
+    gap: 0.8rem;
 }
 
 .header {
@@ -31,7 +31,7 @@ body {
 }
 
 .game {
-    height: 70vh;
+    height: 65vh;
 }
 
 .board {
@@ -44,7 +44,7 @@ body {
 }
 
 .control {
-    height: 20vh;
+    height: fit-content;
 }
 
 .square {
@@ -88,7 +88,7 @@ body {
 .p1.score::before {
     content: 'Player 1';
     display: block;
-    font-size: 2rem;
+    font-size: 1.4rem;
     padding: 0.4rem;
 
 }
@@ -96,7 +96,7 @@ body {
 .p2.score::before {
     content: 'Player 2';
     display: block;
-    font-size: 2rem;
+    font-size: 1.4rem;
     padding: 0.4rem;
 
 }
@@ -104,7 +104,7 @@ body {
 .tie.score::before {
     content: 'Tie';
     display: block;
-    font-size: 2rem;
+    font-size: 1.4rem;
     padding: 0.4rem;
 }
 
@@ -161,13 +161,12 @@ body {
 
 /* Media Queries for Phones */
 @media (max-width: 599px) {
-    
+
     body {
         padding: 1.2rem 0;
     }
 
-    .header
-    {
+    .header {
         font-size: 2.5rem;
         letter-spacing: 4px;
     }
@@ -217,7 +216,7 @@ body {
     .modal .result {
         width: 90vw;
         font-size: 1.5rem;
-        height: 45vw;
+        height: 50vw;
     }
 }
 
