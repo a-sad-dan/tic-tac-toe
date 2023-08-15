@@ -5,6 +5,7 @@ const Player = (sign) => {
 }
 
 let vsAiMode = 1;
+let AiLevel = 0; //  0 - easy, 1 - hard, 2 - impossible
 
 const toggleAi = () => vsAiMode == 1 ? 0 : 1;
 
@@ -47,12 +48,29 @@ const GameModule = (() => {
             document.querySelector('.board').classList.toggle('cross-cursor');
             document.querySelector('.board').classList.toggle('circle-cursor');
 
-            checkWinnerAndTie();
+            printGameBoard();
+
             switchPlayer();
+            checkWinnerAndTie();
+
+
+            if (!isGameOver() && !(checkWin(p1) || checkWin(p2))) {
+                if (vsAiMode && currentPlayer === p2) {
+                    setTimeout(() => {
+                        computerPlayRound();
+                    }, 150);
+                    console.log('puter made this move');
+                }
+            }
         }
     }
 
 
+    const printGameBoard = () => {
+        console.log(`${gameBoard[0]} ${gameBoard[1]} ${gameBoard[2]}`)
+        console.log(`${gameBoard[3]} ${gameBoard[4]} ${gameBoard[5]}`)
+        console.log(`${gameBoard[6]} ${gameBoard[7]} ${gameBoard[8]}`)
+    }
     const computerPlayRound = () => {
         // Finding the valid moves left
         const validMoveIndexes = gameBoard.reduce((acc, value, index) => {
@@ -88,13 +106,15 @@ const GameModule = (() => {
 
     const checkWinnerAndTie = () => {
         if (checkWin(p1) || checkWin(p2)) {
-            const winner = getCurrentPlayer()
+            const winner = getCurrentPlayer() == p1 ? p2 : p1;
             const winnerSign = winner.getSign();
 
             // To Log win of a player
             winner == p1 ? getScores().p1 += 1 : getScores().p2 += 1;
 
-            writeToResult(`${winnerSign} wins this Round!`);
+            setTimeout(() => {
+                writeToResult(`${winnerSign} wins this Round!`);
+            }, 300);
             controlWindow.renderScore();
         }
 
@@ -117,6 +137,7 @@ const GameModule = (() => {
         modal.addEventListener('click', () => {
             modal.classList.add('hidden');
             resetGame();
+
         });
     }
 
@@ -169,20 +190,17 @@ const playGame = () => {
         let currentPlayer = GameModule.getCurrentPlayer();
 
         const positionsArr = document.querySelectorAll('.square');
-        console.log(`current player : ${currentPlayer.getSign()}`)
-
-        // if (currentPlayer.getSign() == 'x') {
+        // console.log(`current player : ${currentPlayer.getSign()}`)
         //Getting input from users
-        positionsArr.forEach(element => element.addEventListener('click', () => {
-            // Toggle Effect on Click
-            element.classList.add('active');
-            setTimeout(() =>
-                element.classList.remove('active'), 500
-            );
-            GameModule.makeMove(parseInt(element.getAttribute('data-index')));
-        }));
-        // }
 
+        // Toggle Effect on Click
+        positionsArr.forEach(element => element.addEventListener('mousedown', () => {
+            element.classList.add('active');
+        }));
+        positionsArr.forEach(element => element.addEventListener('mouseup', () => {
+            GameModule.makeMove(parseInt(element.getAttribute('data-index')));
+            element.classList.remove('active');
+        }));
     };
-}
+};
 playGame();
