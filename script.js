@@ -195,7 +195,6 @@ const GameModule = (() => {
                 '', '', '',
                 '', '', ''];
 
-
         document.querySelectorAll('.square').forEach(element => {
             element.textContent = '';
             if (element.classList.contains('filled')) { element.classList.remove(('filled')) }
@@ -203,6 +202,13 @@ const GameModule = (() => {
             if (element.classList.contains('circle-cursor')) { element.classList.remove(('circle-cursor')) }
             // element.classList.remove('filed');
         });
+
+        if (currentPlayer == p2) {
+            document.querySelector('.board').classList.toggle('cross-cursor');
+            document.querySelector('.board').classList.toggle('circle-cursor');
+        }
+
+        currentPlayer = p1;
     }
 
     return { makeMove, getScores, getCurrentPlayer }
