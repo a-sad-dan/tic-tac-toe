@@ -5,7 +5,11 @@ const Player = (sign) => {
 }
 
 let vsAiMode = 1;
-let AiLevel = 0; //  0 - easy, 1 - hard, 2 - impossible
+let AiLevel = 1; //  0 - easy, 1 - hard, 2 - impossible
+
+const changeAiLevel = (level) => {
+    if (level !== AiLevel) { AiLevel = level };
+}
 
 const toggleAi = () => vsAiMode == 1 ? 0 : 1;
 
@@ -72,6 +76,7 @@ const GameModule = (() => {
         console.log(`${gameBoard[6]} ${gameBoard[7]} ${gameBoard[8]}`)
     }
     const computerPlayRound = () => {
+
         // Finding the valid moves left
         const validMoveIndexes = gameBoard.reduce((acc, value, index) => {
             if (value === "") {
@@ -80,9 +85,46 @@ const GameModule = (() => {
             return acc;
         }, [])
 
+        //Level 0 - easy (random moves)
         const randomIndex = validMoveIndexes[Math.floor(Math.random() * validMoveIndexes.length)]
-        makeMove(randomIndex);
+        if (AiLevel == 0) {
+            makeMove(randomIndex);
+        }
+
+        const findWinningMove = (player) => {
+            for (let i = 0; i < validMoveIndexes.length; i++) {
+                let index = validMoveIndexes[i];
+                gameBoard[index] = player.getSign();
+                if (checkWin(player)) {
+                    gameBoard[index] = ""; //reset the simulated position
+                    return index;
+                };
+                gameBoard[index] = ""; //reset the simulated position
+            }
+            return -1;
+        }
+
+        // Level 1 - makes winning move, blocks player move
+        if (AiLevel == 1) {
+            const winningMove = findWinningMove(p2);
+            const blockingMove = findWinningMove(p1);
+
+            // console.log('winning move : ', winningMove);
+
+            if (winningMove != -1) {
+                makeMove(winningMove);
+                console.log('tring to make winning move')
+            } else if (blockingMove !== -1) {
+                makeMove(blockingMove);
+                console.log('tring to make blocking move')
+            } else {
+                makeMove(randomIndex);
+                console.log('tring to make random move')
+            }
+        }
     }
+
+
 
     const switchPlayer = () => {
         currentPlayer == p1 ? currentPlayer = p2 : currentPlayer = p1;
