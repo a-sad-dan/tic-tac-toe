@@ -5,13 +5,13 @@ const Player = (sign) => {
 }
 
 let vsAiMode = 1;
-let AiLevel = 1; //  0 - easy, 1 - hard, 2 - impossible
+let AiLevel = 0; //  0 - easy, 1 - hard, 2 - impossible
 
 const changeAiLevel = (level) => {
     if (level !== AiLevel) { AiLevel = level };
 }
 
-const toggleAi = () => vsAiMode == 1 ? 0 : 1;
+const toggleAi = () => vsAiMode == 1 ? vsAiMode = 0 : vsAiMode = 1;
 
 const p1 = Player('x');
 const p2 = Player('o');
@@ -52,7 +52,7 @@ const GameModule = (() => {
             document.querySelector('.board').classList.toggle('cross-cursor');
             document.querySelector('.board').classList.toggle('circle-cursor');
 
-            printGameBoard();
+            // printGameBoard();
 
             switchPlayer();
             checkWinnerAndTie();
@@ -63,18 +63,19 @@ const GameModule = (() => {
                     setTimeout(() => {
                         computerPlayRound();
                     }, 150);
-                    console.log('puter made this move');
+                    // console.log('puter made this move');
                 }
             }
         }
     }
 
 
-    const printGameBoard = () => {
-        console.log(`${gameBoard[0]} ${gameBoard[1]} ${gameBoard[2]}`)
-        console.log(`${gameBoard[3]} ${gameBoard[4]} ${gameBoard[5]}`)
-        console.log(`${gameBoard[6]} ${gameBoard[7]} ${gameBoard[8]}`)
-    }
+    // const printGameBoard = () => {
+    //     console.log(`${gameBoard[0]} ${gameBoard[1]} ${gameBoard[2]}`)
+    //     console.log(`${gameBoard[3]} ${gameBoard[4]} ${gameBoard[5]}`)
+    //     console.log(`${gameBoard[6]} ${gameBoard[7]} ${gameBoard[8]}`)
+    // }
+
     const computerPlayRound = () => {
 
         // Finding the valid moves left
@@ -113,13 +114,13 @@ const GameModule = (() => {
 
             if (winningMove != -1) {
                 makeMove(winningMove);
-                console.log('tring to make winning move')
+                // console.log('tring to make winning move')
             } else if (blockingMove !== -1) {
                 makeMove(blockingMove);
-                console.log('tring to make blocking move')
+                // console.log('tring to make blocking move')
             } else {
                 makeMove(randomIndex);
-                console.log('tring to make random move')
+                // console.log('tring to make random move')
             }
         }
     }
@@ -184,6 +185,61 @@ const GameModule = (() => {
     }
 
 
+
+
+    // Button to toggle AI
+    document.querySelector('button.mode-select').addEventListener('click', () => {
+        resetGame();
+        toggleAiMode();
+        for (const key in scores) {
+            if (key) {
+                scores[key] = 0;
+            }
+        }
+        controlWindow.renderScore();
+    })
+
+    // Button to toggle AI Level
+    const level = document.querySelector('.level');
+    if (vsAiMode) {
+
+        level.addEventListener('mousedown', () => {
+            if (AiLevel == 0) {
+                changeAiLevel(1);
+                level.textContent = 'Hard';
+            }
+            else {
+                changeAiLevel(0);
+                level.textContent = 'Easy';
+            }
+        })
+    }
+
+
+    const toggleAiMode = () => {
+        toggleAi();
+        const modeBtn = document.querySelector('.mode-select');
+
+        if (vsAiMode) {
+            level.classList.remove('hidden');
+            level.classList.remove('display-none');
+            modeBtn.textContent = 'VS AI';
+            document.querySelector('.p2.score').classList.add('computer');
+            document.querySelector('.p1.score').classList.add('you');
+
+        }
+        else {
+            level.classList.add('hidden');
+            level.classList.add('display-none');
+            modeBtn.textContent = 'VS Human'
+            document.querySelector('.p2.score').classList.remove('computer');
+            document.querySelector('.p1.score').classList.remove('you');
+        }
+    }
+
+    if (vsAiMode) {
+    }
+
     // Private Method to check if the game is over
     const isGameOver = () => {
         return (gameBoard.every(entry => entry !== ''));
@@ -208,7 +264,9 @@ const GameModule = (() => {
             document.querySelector('.board').classList.toggle('circle-cursor');
         }
 
+
         currentPlayer = p1;
+
     }
 
     return { makeMove, getScores, getCurrentPlayer }
@@ -252,3 +310,6 @@ const playGame = () => {
     };
 };
 playGame();
+
+
+// Need to implement impossible level for AI
