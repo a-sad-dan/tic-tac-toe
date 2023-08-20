@@ -75,6 +75,13 @@ body {
 
 .control {
     display: grid;
+    grid-template-columns: 3fr 1fr;
+
+}
+
+
+.control .scores {
+    display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     place-content: center;
 }
@@ -93,6 +100,13 @@ body {
 
 }
 
+.p1.score.you::before {
+    content: 'You';
+    display: block;
+    font-size: 1.4rem;
+    padding: 0.4rem;
+}
+
 .p2.score::before {
     content: 'Player 2';
     display: block;
@@ -101,12 +115,57 @@ body {
 
 }
 
+.p2.score.computer::before {
+    content: 'Computer';
+    display: block;
+    font-size: 1.4rem;
+    padding: 0.4rem;
+}
+
 .tie.score::before {
     content: 'Tie';
     display: block;
     font-size: 1.4rem;
     padding: 0.4rem;
 }
+
+.mode {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    gap: 0rem;
+    grid-template-columns: auto auto;
+    width: fit-content;
+}
+
+.mode-select {
+    background-color: transparent;
+    border: 0px;
+    text-align: center;
+    height: fit-content;
+    width: fit-content;
+    cursor: pointer;
+    justify-self: center;
+    align-self: center;
+
+    font-size: 1.2rem;
+    font-weight: 300;
+    padding: 0.4rem 1.2rem;
+}
+
+.level {
+    text-align: center;
+    width: 100%;
+    padding: 0.2rem 1.1rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    border-left: 2px solid var(--primary);
+
+}
+
 
 .modal {
     background: rgba(0, 0, 0, 0.1);
@@ -144,6 +203,10 @@ body {
 .hidden {
     height: 0px;
     opacity: 0;
+}
+
+.display-none {
+    display: none;
 }
 
 .filled {
@@ -195,7 +258,13 @@ body {
         display: block;
         font-size: 1.4rem;
         padding: 0.2rem;
+    }
 
+    .p1.score.you::before {
+        content: 'You';
+        display: block;
+        font-size: 1.4rem;
+        padding: 0.2rem;
     }
 
     .p2.score::before {
@@ -204,6 +273,13 @@ body {
         font-size: 1.4rem;
         padding: 0.2rem;
 
+    }
+
+    .p2.score.computer::before {
+        content: 'Computer' !important;
+        display: block;
+        font-size: 1.4rem;
+        padding: 0.2rem;
     }
 
     .tie.score::before {
@@ -218,10 +294,34 @@ body {
         font-size: 1.5rem;
         height: 50vw;
     }
+
+    .control {
+        gap: 0.8rem;
+        grid-template-rows: max-content min-content;
+    }
+
+    .scores {
+        grid-column: span 2;
+    }
+
+    .mode {
+        grid-row: 1/2;
+        place-self: center;
+        grid-column: span 2;
+    }
+
+    .mode-select,
+    .level {
+        font-weight: 300;
+    }
+
+    .level {
+        border-left: 1px solid var(--primary);
+    }
+
+
+    /* Quick fix for font weight */
+    .control * {
+        font-weight: 200;
+    }
 }
-
-/*
- Notes to Self 
-need to remove the active toggle from the squares which are already filled
-
-*/
